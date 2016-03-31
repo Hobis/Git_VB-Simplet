@@ -1,0 +1,18 @@
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\bin\Debug\HBMDK.exe.config
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\bin\Debug\HBMDK.exe
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\bin\Debug\HBMDK.pdb
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\bin\Debug\HBMDK.xml
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\WndRoot.baml
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\WndRoot.g.vb
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\Application.g.vb
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\HBMDK_MarkupCompile.cache
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\HBMDK.g.resources
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\HBMDK.Resources.resources
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\HBMDK.vbproj.GenerateResource.Cache
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\HBMDK.exe
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\HBMDK.xml
+C:\Users\jhb0b\Documents\Visual Studio 2013\Projects\HBMDK\HBMDK\obj\Debug\HBMDK.pdb
+D:\Git_VB-Simplet\HBMDK\HBMDK\bin\Debug\HBMDK.exe.config
+D:\Git_VB-Simplet\HBMDK\HBMDK\obj\Debug\HBMDK.exe
+D:\Git_VB-Simplet\HBMDK\HBMDK\obj\Debug\HBMDK.xml
+D:\Git_VB-Simplet\HBMDK\HBMDK\obj\Debug\HBMDK.pdb
