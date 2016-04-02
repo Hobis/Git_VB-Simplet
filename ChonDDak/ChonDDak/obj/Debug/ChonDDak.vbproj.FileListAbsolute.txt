@@ -9,13 +9,13 @@ D:\Git_VB-Simplet\Thochiering\ChonDDak\obj\Debug\ChonDDak.vbproj.GenerateResourc
 D:\Git_VB-Simplet\Thochiering\ChonDDak\obj\Debug\ChonDDak.exe
 D:\Git_VB-Simplet\Thochiering\ChonDDak\obj\Debug\ChonDDak.xml
 D:\Git_VB-Simplet\Thochiering\ChonDDak\obj\Debug\ChonDDak.pdb
-D:\Git_VB-Simplet\ChonDDak\ChonDDak\bin\Debug\ChonDDak.exe.config
-D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.exe
-D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.xml
-D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.pdb
 D:\Git_VB-Simplet\ChonDDak\ChonDDak\bin\Debug\ChonDDak.exe
+D:\Git_VB-Simplet\ChonDDak\ChonDDak\bin\Debug\ChonDDak.exe.config
 D:\Git_VB-Simplet\ChonDDak\ChonDDak\bin\Debug\ChonDDak.pdb
 D:\Git_VB-Simplet\ChonDDak\ChonDDak\bin\Debug\ChonDDak.xml
 D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.FrmRoot.resources
 D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.Resources.resources
 D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.vbproj.GenerateResource.Cache
+D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.exe
+D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.xml
+D:\Git_VB-Simplet\ChonDDak\ChonDDak\obj\Debug\ChonDDak.pdb

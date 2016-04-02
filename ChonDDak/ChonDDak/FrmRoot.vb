@@ -113,6 +113,54 @@ Public NotInheritable Class FrmRoot
     End Sub
 
     ' ::
+    Private Sub p_WorkCoreIng(p As String)
+        Dim t_ab As Boolean = False
+        If Not _cf_SearchStrs Is Nothing Then
+            For Each t_rp In _cf_SearchStrs
+                If _cf_IsUseRegEx Then ' 정규식 사용 Yes
+                    If _cf_IsIgnoreCase Then
+                        If Regex.IsMatch(p, t_rp, _
+                                RegexOptions.None Or RegexOptions.Singleline) Then
+                            t_ab = True
+                            Exit For
+                        End If
+                    Else
+                        If Regex.IsMatch(p, t_rp, _
+                                RegexOptions.IgnoreCase Or RegexOptions.Singleline) Then
+                            t_ab = True
+                            Exit For
+                        End If
+                    End If
+                Else ' 정규식 사용 No
+                    If _cf_IsIgnoreCase Then
+                        If p.IndexOf(t_rp) > -1 Then
+                            t_ab = True
+                            Exit For
+                        End If
+                    Else
+                        If p.IndexOf(t_rp, StringComparison.OrdinalIgnoreCase) > -1 Then
+                            t_ab = True
+                            Exit For
+                        End If
+                    End If
+                End If
+            Next
+        Else
+            t_ab = True
+        End If
+
+        If t_ab Then
+            p_CheckInvoke(Me, _
+                Sub()
+                    p_Txb1_AppendText(p)
+                End Sub)
+            _cf_MatchingCount += 1
+        End If
+        _cf_TotalCount += 1
+        p_CheckInvoke(Me, AddressOf p_Txb12_Update)
+    End Sub
+
+    ' ::
     Private Sub p_WorkCore(dp As String)
         Try
             Dim t_la As Integer
@@ -124,58 +172,11 @@ Public NotInheritable Class FrmRoot
             i = 0
             While i < t_la
                 Thread.Sleep(1)
-
                 If _cf_Action Is Nothing Then
                     Exit Sub
                 End If
-
                 Dim t_fp As String = t_fps(i)
-                Dim t_ab As Boolean = False
-
-                If Not _cf_SearchStrs Is Nothing Then
-                    For Each t_rp In _cf_SearchStrs
-                        If _cf_IsUseRegEx Then ' 정규식 사용 Yes
-                            If _cf_IsIgnoreCase Then
-                                If Regex.IsMatch(t_fp, t_rp, _
-                                        RegexOptions.None Or RegexOptions.Singleline) Then
-                                    t_ab = True
-                                    Exit For
-                                End If
-                            Else
-                                If Regex.IsMatch(t_fp, t_rp, _
-                                        RegexOptions.IgnoreCase Or RegexOptions.Singleline) Then
-                                    t_ab = True
-                                    Exit For
-                                End If
-                            End If
-                        Else ' 정규식 사용 No
-                            If _cf_IsIgnoreCase Then
-                                If t_fp.IndexOf(t_rp) > -1 Then
-                                    t_ab = True
-                                    Exit For
-                                End If
-                            Else
-                                If t_fp.IndexOf(t_rp, StringComparison.OrdinalIgnoreCase) > -1 Then
-                                    t_ab = True
-                                    Exit For
-                                End If
-                            End If
-                        End If
-                    Next
-                Else
-                    t_ab = True
-                End If
-
-                If t_ab Then
-                    p_CheckInvoke(Me, _
-                        Sub()
-                            p_Txb1_AppendText(t_fp)
-                        End Sub)
-                    _cf_MatchingCount += 1
-                End If
-                _cf_TotalCount += 1
-                p_CheckInvoke(Me, AddressOf p_Txb12_Update)
-
+                p_WorkCoreIng(t_fp)
                 i += 1
             End While
 
@@ -184,13 +185,13 @@ Public NotInheritable Class FrmRoot
             t_la = t_dps.Length
             i = 0
             While i < t_la
+                Thread.Sleep(1)
                 If _cf_Action Is Nothing Then
                     Exit Sub
                 End If
-
                 Dim t_dp As String = t_dps(i)
                 p_WorkCore(t_dp)
-
+                p_WorkCoreIng(t_dp)
                 i += 1
             End While
         Catch
