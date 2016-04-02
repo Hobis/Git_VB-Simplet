@@ -43,6 +43,7 @@ Partial Class FrmRoot
         Me._Btn3 = New System.Windows.Forms.Button()
         Me._Ckb1 = New System.Windows.Forms.CheckBox()
         Me._Ckb2 = New System.Windows.Forms.CheckBox()
+        Me._Btn13 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         '_Btn1
@@ -94,7 +95,7 @@ Partial Class FrmRoot
         Me._Btn12.Size = New System.Drawing.Size(100, 23)
         Me._Btn12.TabIndex = 12
         Me._Btn12.TabStop = False
-        Me._Btn12.Text = "클립보드 빼기"
+        Me._Btn12.Text = "클립보드 전체"
         Me._Btn12.UseVisualStyleBackColor = True
         '
         '_Txb11
@@ -270,6 +271,19 @@ Partial Class FrmRoot
         Me._Ckb2.TabStop = False
         Me._Ckb2.UseVisualStyleBackColor = False
         '
+        '_Btn13
+        '
+        Me._Btn13.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me._Btn13.Cursor = System.Windows.Forms.Cursors.Hand
+        Me._Btn13.Location = New System.Drawing.Point(404, 333)
+        Me._Btn13.Name = "_Btn13"
+        Me._Btn13.Padding = New System.Windows.Forms.Padding(0, 2, 0, 0)
+        Me._Btn13.Size = New System.Drawing.Size(100, 23)
+        Me._Btn13.TabIndex = 25
+        Me._Btn13.TabStop = False
+        Me._Btn13.Text = "클립보드 선택"
+        Me._Btn13.UseVisualStyleBackColor = True
+        '
         'FrmRoot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
@@ -277,6 +291,7 @@ Partial Class FrmRoot
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.AppWorkspace
         Me.ClientSize = New System.Drawing.Size(700, 600)
+        Me.Controls.Add(Me._Btn13)
         Me.Controls.Add(Me._Ckb2)
         Me.Controls.Add(Me._Ckb1)
         Me.Controls.Add(Me._BtnInfo)
@@ -326,5 +341,6 @@ Partial Class FrmRoot
     Private WithEvents _Btn3 As System.Windows.Forms.Button
     Private WithEvents _Ckb1 As System.Windows.Forms.CheckBox
     Private WithEvents _Ckb2 As System.Windows.Forms.CheckBox
+    Private WithEvents _Btn13 As System.Windows.Forms.Button
 
 End Class

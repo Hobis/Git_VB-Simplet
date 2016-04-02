@@ -14,7 +14,7 @@ Public NotInheritable Class FrmRoot
     End Sub
 
     Private Sub p_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "내컴에 파일 검색기  Ver 1.35"
+        Me.Text = "내컴에 파일 검색기  Ver 1.37"
         Me.BackgroundImage = Global.ChonDDak.My.Resources.Resources.Untitled_1
 
         Dim t_sb As Rectangle = Screen.PrimaryScreen.Bounds
@@ -243,6 +243,14 @@ Public NotInheritable Class FrmRoot
     End Sub
 
     ' ::
+    Private Sub p_Btn13_Click(sender As Object, e As EventArgs) Handles _Btn13.Click
+        Dim t_v As String = _Txb1.SelectedText
+        If Not String.IsNullOrEmpty(t_v) Then
+            Clipboard.SetText(t_v)
+        End If
+    End Sub
+
+    ' ::
     Private Sub p_Btn4_Click(sender As Object, e As EventArgs) Handles _Btn4.Click
         _Txb2.Clear()
     End Sub
@@ -336,11 +344,51 @@ Public NotInheritable Class FrmRoot
     End Sub
 
     Private Sub p_FocusOut_MouseUp(sender As Object, e As MouseEventArgs) Handles _
-                        _Btn12.MouseUp, _Btn11.MouseUp,
+                        _Btn13.MouseUp, _Btn12.MouseUp, _Btn11.MouseUp,
                         _BtnEtc.MouseUp, _BtnInfo.MouseUp,
                         _Btn6.MouseUp, _Btn5.MouseUp, _Btn4.MouseUp,
                         _Btn3.MouseUp, _Btn2.MouseUp, _Btn1.MouseUp
         _Txb13.Focus()
+    End Sub
+
+
+
+
+
+
+
+
+    Private Function p_IsControlDown() As Boolean
+        Return (Control.ModifierKeys And Keys.Control) = Keys.Control
+    End Function
+    'Private Sub p_Txb1_KeyUp(sender As Object, e As KeyEventArgs) Handles _Txb1.KeyUp
+    '    p_TxbNowLineSelected(_Txb1)
+    'End Sub
+    Private Sub p_Txb1_Click(sender As Object, e As EventArgs) Handles _Txb1.Click
+        p_TxbNowLineSelected(_Txb1)
+    End Sub
+    Private Sub p_TxbNowLineSelected(txb As TextBox)
+        If Not p_IsControlDown() Then
+            Exit Sub
+        End If
+        Dim t_Lines() As String = txb.Lines
+        If t_Lines.Length > 0 Then
+            Dim t_LineIndex As Integer = txb.GetLineFromCharIndex(txb.SelectionStart)
+            Dim t_Line As String = t_Lines(t_LineIndex)
+            Dim t_SelectionStart As Integer = 0
+            Dim t_SelectionLength As Integer = t_Line.Length
+            If t_SelectionLength > 0 Then
+                Dim i As Integer = 0
+                While i < t_LineIndex
+                    t_SelectionStart += (t_Lines(i).Length + 2)
+                    i += 1
+                End While
+                txb.SelectionStart = t_SelectionStart
+                txb.SelectionLength = t_SelectionLength
+                txb.Focus()
+                txb.ScrollToCaret()
+            End If
+        End If
     End Sub
 
 End Class
