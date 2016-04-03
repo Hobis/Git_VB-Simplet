@@ -2,6 +2,7 @@
 
     Public Sub New()
         MyBase.New()
+        Me.DoubleBuffered = True
     End Sub
 
     'Protected Overrides ReadOnly Property CreateParams() As CreateParams

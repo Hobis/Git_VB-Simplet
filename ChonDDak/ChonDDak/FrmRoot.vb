@@ -14,7 +14,7 @@ Public NotInheritable Class FrmRoot
     End Sub
 
     Private Sub p_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "내컴에 파일 검색기  Ver 1.41b"
+        Me.Text = "내컴에 파일 검색기  Ver 1.42b"
         Me.BackgroundImage = Global.ChonDDak.My.Resources.Resources.Untitled_1
 
         Dim t_sb As Rectangle = Screen.PrimaryScreen.Bounds
