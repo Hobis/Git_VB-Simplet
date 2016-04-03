@@ -69,6 +69,18 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CUTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XXXX.Designer.vb">
+      <DependentUpon>XXXX.vb</DependentUpon>
+    </Compile>
+    <Compile Include="XXXX.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CUComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FrmRoot.vb">
       <SubType>Form</SubType>
     </Compile>

@@ -14,7 +14,7 @@ Public NotInheritable Class FrmRoot
     End Sub
 
     Private Sub p_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "내컴에 파일 검색기  Ver 1.40b"
+        Me.Text = "내컴에 파일 검색기  Ver 1.41b"
         Me.BackgroundImage = Global.ChonDDak.My.Resources.Resources.Untitled_1
 
         Dim t_sb As Rectangle = Screen.PrimaryScreen.Bounds
@@ -459,6 +459,7 @@ Public NotInheritable Class FrmRoot
             Case 2
                 _cf_CountingCheckType = _CheckKinds.File
         End Select
+        'p_FocusOut_MouseUp(Nothing, Nothing)
         p_Trace("_cf_CheckKinds(검색타입): " & _cf_CountingCheckType)
     End Sub
 

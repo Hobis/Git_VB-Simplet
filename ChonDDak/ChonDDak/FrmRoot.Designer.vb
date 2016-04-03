@@ -44,7 +44,7 @@ Partial Class FrmRoot
         Me._Ckb1 = New System.Windows.Forms.CheckBox()
         Me._Ckb2 = New System.Windows.Forms.CheckBox()
         Me._Btn13 = New System.Windows.Forms.Button()
-        Me._Cmb1 = New System.Windows.Forms.ComboBox()
+        Me._Cmb1 = New ChonDDak.CUComboBox()
         Me.SuspendLayout()
         '
         '_Btn1
@@ -358,6 +358,7 @@ Partial Class FrmRoot
     Private WithEvents _Ckb1 As System.Windows.Forms.CheckBox
     Private WithEvents _Ckb2 As System.Windows.Forms.CheckBox
     Private WithEvents _Btn13 As System.Windows.Forms.Button
-    Friend WithEvents _Cmb1 As System.Windows.Forms.ComboBox
+    'Private WithEvents _Cmb1 As System.Windows.Forms.ComboBox
+    Private WithEvents _Cmb1 As CUComboBox
 
 End Class
