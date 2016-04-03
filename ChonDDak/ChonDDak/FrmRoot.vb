@@ -14,7 +14,7 @@ Public NotInheritable Class FrmRoot
     End Sub
 
     Private Sub p_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "내컴에 파일 검색기  Ver 1.37"
+        Me.Text = "내컴에 파일 검색기  Ver 1.40b"
         Me.BackgroundImage = Global.ChonDDak.My.Resources.Resources.Untitled_1
 
         Dim t_sb As Rectangle = Screen.PrimaryScreen.Bounds
@@ -27,6 +27,10 @@ Public NotInheritable Class FrmRoot
         Me.AllowDrop = True
         p_Ckb1_CheckedChanged(Nothing, Nothing)
         p_Ckb2_CheckedChanged(Nothing, Nothing)
+
+        Me.DoubleBuffered = True
+        Me.SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        _Cmb1.SelectedIndex = 0
     End Sub
 
 
@@ -50,15 +54,26 @@ Public NotInheritable Class FrmRoot
     ' -
     Private _cf_Action As Action = Nothing
     '
-    Private _cf_TotalCount As Integer = 0
+    Private _cf_CountingTotal As Integer = 0
     '
-    Private _cf_MatchingCount As Integer = 0
+    Private _cf_CountingFile As Integer = 0
+    '
+    Private _cf_CountingFolder As Integer = 0
     '
     Private _cf_SearchStrs() As String = Nothing
-    '
+
+    ' - 정규식 사용 여부
     Private _cf_IsUseRegEx As Boolean = False
-    '
+    ' - 대소문자 구분 여부
     Private _cf_IsIgnoreCase As Boolean = False
+
+
+    Private Enum _CheckKinds As Integer
+        Total = 0
+        Folder = 1
+        File = 2
+    End Enum
+    Private _cf_CountingCheckType As _CheckKinds = _CheckKinds.Total
 
 
 
@@ -74,7 +89,10 @@ Public NotInheritable Class FrmRoot
 
     ' ::
     Private Sub p_Txb12_Update()
-        _Txb12.Text = String.Format("(전체: {0}, 매칭: {1})", _cf_TotalCount, _cf_MatchingCount)
+        '_Txb12.Text = String.Format("(전체: {0}, 매칭: {1})", _cf_CountingTotal, _cf_CountingFile)
+        '_Txb12.Text = String.Format("(카운팅: {0}, 매칭: (토탈: {1}, 폴더: {2}, 파일: {3}))", _cf_Counting, _cf_CountingTotal, _cf_CountingFolder, _cf_CountingFile)
+        _Txb12.Text = String.Format("토탈: {0}, 폴더: {1}, 파일: {2}", _cf_CountingTotal, _cf_CountingFolder, _cf_CountingFile)
+        '_Txb12.Text = String.Format("카운팅: {0}, 토탈: {1}, 폴더: {2}, 파일: {3}", _cf_Counting, _cf_CountingTotal, _cf_CountingFolder, _cf_CountingFile)
     End Sub
 
 
@@ -96,8 +114,9 @@ Public NotInheritable Class FrmRoot
             End If
             p_Btn11_Click(Nothing, Nothing)
             p_WorkingStringsStart()
-            _cf_TotalCount = 0
-            _cf_MatchingCount = 0
+            _cf_CountingTotal = 0
+            _cf_CountingFile = 0
+            _cf_CountingFolder = 0
             _cf_Action = AddressOf p_WorkAction
             ' ~~~~ 여기서 작업 쓰레드 시작!
             _cf_Action.BeginInvoke(Nothing, Nothing)
@@ -109,12 +128,14 @@ Public NotInheritable Class FrmRoot
     ' ::
     Private Sub p_WorkAction()
         p_WorkCore(_cf_Path)
+        p_Txb12_Update()
         p_WorkClear()
     End Sub
 
     ' ::
-    Private Sub p_WorkCoreIng(p As String)
+    Private Sub p_WorkCoreIng(p As String, ck As _CheckKinds)
         Dim t_ab As Boolean = False
+
         If Not _cf_SearchStrs Is Nothing Then
             For Each t_rp In _cf_SearchStrs
                 If _cf_IsUseRegEx Then ' 정규식 사용 Yes
@@ -149,15 +170,22 @@ Public NotInheritable Class FrmRoot
             t_ab = True
         End If
 
+        ' 매칭됨~
         If t_ab Then
             p_CheckInvoke(Me, _
                 Sub()
                     p_Txb1_AppendText(p)
                 End Sub)
-            _cf_MatchingCount += 1
+
+            _cf_CountingTotal += 1
+            If (ck = _CheckKinds.Folder) Then
+                _cf_CountingFolder += 1
+            ElseIf (ck = _CheckKinds.File) Then
+                _cf_CountingFile += 1
+            End If
+
+            p_CheckInvoke(Me, AddressOf p_Txb12_Update)
         End If
-        _cf_TotalCount += 1
-        p_CheckInvoke(Me, AddressOf p_Txb12_Update)
     End Sub
 
     ' ::
@@ -167,18 +195,21 @@ Public NotInheritable Class FrmRoot
             Dim i As Integer
 
             '~~ 파일검색
-            Dim t_fps() As String = Directory.GetFiles(dp)
-            t_la = t_fps.Length
-            i = 0
-            While i < t_la
-                Thread.Sleep(1)
-                If _cf_Action Is Nothing Then
-                    Exit Sub
-                End If
-                Dim t_fp As String = t_fps(i)
-                p_WorkCoreIng(t_fp)
-                i += 1
-            End While
+            If (_cf_CountingCheckType = _CheckKinds.Total) OrElse _
+                (_cf_CountingCheckType = _CheckKinds.File) Then
+                Dim t_fps() As String = Directory.GetFiles(dp)
+                t_la = t_fps.Length
+                i = 0
+                While i < t_la
+                    Thread.Sleep(1)
+                    If _cf_Action Is Nothing Then
+                        Exit Sub
+                    End If
+                    Dim t_fp As String = t_fps(i)
+                    p_WorkCoreIng(t_fp, _CheckKinds.File)
+                    i += 1
+                End While
+            End If
 
             '~~ 폴더검색
             Dim t_dps() As String = Directory.GetDirectories(dp)
@@ -190,11 +221,14 @@ Public NotInheritable Class FrmRoot
                     Exit Sub
                 End If
                 Dim t_dp As String = t_dps(i)
+                If Not (_cf_CountingCheckType = _CheckKinds.File) Then
+                    p_WorkCoreIng(t_dp, _CheckKinds.Folder)
+                End If
                 p_WorkCore(t_dp)
-                p_WorkCoreIng(t_dp)
                 i += 1
             End While
-        Catch
+        Catch e As Exception
+            p_Trace(e.ToString())
         End Try
     End Sub
 
@@ -391,5 +425,43 @@ Public NotInheritable Class FrmRoot
             End If
         End If
     End Sub
+
+
+
+    'Private Sub p_Rdb1_CheckedChanged(sender As Object, e As EventArgs)
+    '    If _Rdb1.Checked Then
+    '        _cf_CheckKinds = _CheckKinds.All
+    '        p_Trace(_cf_CheckKinds)
+    '    End If
+    'End Sub
+
+    'Private Sub p_Rdb2_CheckedChanged(sender As Object, e As EventArgs)
+    '    If _Rdb2.Checked Then
+    '        _cf_CheckKinds = _CheckKinds.File
+    '        p_Trace(_cf_CheckKinds)
+    '    End If
+    'End Sub
+
+    'Private Sub p_Rdb3_CheckedChanged(sender As Object, e As EventArgs)
+    '    If _Rdb3.Checked Then
+    '        _cf_CheckKinds = _CheckKinds.Folder
+    '        p_Trace(_cf_CheckKinds)
+    '    End If
+    'End Sub
+
+    Private Sub p_Cmb1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles _Cmb1.SelectedIndexChanged
+        'p_Trace("_Cmb1.SelectedIndex: " & _Cmb1.SelectedIndex)
+        Select Case _Cmb1.SelectedIndex
+            Case 0
+                _cf_CountingCheckType = _CheckKinds.Total
+            Case 1
+                _cf_CountingCheckType = _CheckKinds.Folder
+            Case 2
+                _cf_CountingCheckType = _CheckKinds.File
+        End Select
+        p_Trace("_cf_CheckKinds(검색타입): " & _cf_CountingCheckType)
+    End Sub
+
+
 
 End Class

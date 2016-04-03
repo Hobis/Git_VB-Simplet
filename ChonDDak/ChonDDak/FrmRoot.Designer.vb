@@ -44,6 +44,7 @@ Partial Class FrmRoot
         Me._Ckb1 = New System.Windows.Forms.CheckBox()
         Me._Ckb2 = New System.Windows.Forms.CheckBox()
         Me._Btn13 = New System.Windows.Forms.Button()
+        Me._Cmb1 = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         '_Btn1
@@ -185,10 +186,10 @@ Partial Class FrmRoot
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me._Txb13.BackColor = System.Drawing.Color.White
         Me._Txb13.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me._Txb13.Location = New System.Drawing.Point(50, 339)
+        Me._Txb13.Location = New System.Drawing.Point(14, 339)
         Me._Txb13.Name = "_Txb13"
         Me._Txb13.ReadOnly = True
-        Me._Txb13.Size = New System.Drawing.Size(42, 14)
+        Me._Txb13.Size = New System.Drawing.Size(36, 14)
         Me._Txb13.TabIndex = 21
         Me._Txb13.TabStop = False
         Me._Txb13.WordWrap = False
@@ -212,10 +213,10 @@ Partial Class FrmRoot
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me._Txb12.BackColor = System.Drawing.Color.White
         Me._Txb12.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me._Txb12.Location = New System.Drawing.Point(95, 339)
+        Me._Txb12.Location = New System.Drawing.Point(56, 339)
         Me._Txb12.Name = "_Txb12"
         Me._Txb12.ReadOnly = True
-        Me._Txb12.Size = New System.Drawing.Size(200, 14)
+        Me._Txb12.Size = New System.Drawing.Size(338, 14)
         Me._Txb12.TabIndex = 20
         Me._Txb12.TabStop = False
         Me._Txb12.WordWrap = False
@@ -284,6 +285,20 @@ Partial Class FrmRoot
         Me._Btn13.Text = "클립보드 선택"
         Me._Btn13.UseVisualStyleBackColor = True
         '
+        '_Cmb1
+        '
+        Me._Cmb1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me._Cmb1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me._Cmb1.DropDownWidth = 100
+        Me._Cmb1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me._Cmb1.FormattingEnabled = True
+        Me._Cmb1.Items.AddRange(New Object() {"토탈", "폴더", "파일"})
+        Me._Cmb1.Location = New System.Drawing.Point(336, 365)
+        Me._Cmb1.Name = "_Cmb1"
+        Me._Cmb1.Size = New System.Drawing.Size(100, 20)
+        Me._Cmb1.TabIndex = 30
+        Me._Cmb1.TabStop = False
+        '
         'FrmRoot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
@@ -291,6 +306,7 @@ Partial Class FrmRoot
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.AppWorkspace
         Me.ClientSize = New System.Drawing.Size(700, 600)
+        Me.Controls.Add(Me._Cmb1)
         Me.Controls.Add(Me._Btn13)
         Me.Controls.Add(Me._Ckb2)
         Me.Controls.Add(Me._Ckb1)
@@ -342,5 +358,6 @@ Partial Class FrmRoot
     Private WithEvents _Ckb1 As System.Windows.Forms.CheckBox
     Private WithEvents _Ckb2 As System.Windows.Forms.CheckBox
     Private WithEvents _Btn13 As System.Windows.Forms.Button
+    Friend WithEvents _Cmb1 As System.Windows.Forms.ComboBox
 
 End Class
